@@ -11,571 +11,471 @@
 <meta property="og:url" content="https://shiochann.github.io/note-builder/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9D%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --bg:#EFEFEA;
-    --surface:#FBFAF6;
-    --surface-2:#E6E7E0;
-    --ink:#1C2430;
-    --ink-2:#4E5766;
-    --ink-3:#7C8494;
-    --line:#DBDBD1;
-    --line-strong:#C4C5B9;
-    --ai:#27446E;          /* 藍 */
-    --ai-soft:#27446E1A;
-    --ochre:#9C6E23;
-    --ochre-soft:#9C6E231F;
-    --shadow:0 1px 2px rgba(28,36,48,.05), 0 8px 24px -16px rgba(28,36,48,.28);
-    --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
-    --gothic:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
-    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,"Courier New",monospace;
+    --pink:#FF99B4;
+    --pink-deep:#F07A9B;
+    --pink-soft:#FFB6C9;
+    --pink-bg:#FFEFF0;
+    --pink-bg-2:#FFF6F7;
+    --yellow-bg:#FFFBCA;
+    --yellow:#FFE86B;
+    --blue-bg:#EAF6FB;
+    --blue:#7CC4EA;
+    --ink:#222;
+    --ink-2:#555;
+    --ink-3:#8A8A8A;
+    --white:#fff;
+    --line:#FFD6E0;
+    --shadow:0 10px 30px -14px rgba(240,122,155,.45);
+    --maru:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+    --script:"Caveat","Segoe Script",cursive;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
   }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#14171C;
-      --surface:#1B1F26;
-      --surface-2:#232833;
-      --ink:#E9E9E3;
-      --ink-2:#A8B0BC;
-      --ink-3:#7A8290;
-      --line:#2B313A;
-      --line-strong:#3B4351;
-      --ai:#7FA8DE;
-      --ai-soft:#7FA8DE1F;
-      --ochre:#D6A452;
-      --ochre-soft:#D6A45222;
-      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.8);
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#14171C;
-    --surface:#1B1F26;
-    --surface-2:#232833;
-    --ink:#E9E9E3;
-    --ink-2:#A8B0BC;
-    --ink-3:#7A8290;
-    --line:#2B313A;
-    --line-strong:#3B4351;
-    --ai:#7FA8DE;
-    --ai-soft:#7FA8DE1F;
-    --ochre:#D6A452;
-    --ochre-soft:#D6A45222;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px -18px rgba(0,0,0,.8);
-  }
-  :root[data-theme="light"]{
-    --bg:#EFEFEA;
-    --surface:#FBFAF6;
-    --surface-2:#E6E7E0;
-    --ink:#1C2430;
-    --ink-2:#4E5766;
-    --ink-3:#7C8494;
-    --line:#DBDBD1;
-    --line-strong:#C4C5B9;
-    --ai:#27446E;
-    --ai-soft:#27446E1A;
-    --ochre:#9C6E23;
-    --ochre-soft:#9C6E231F;
-    --shadow:0 1px 2px rgba(28,36,48,.05), 0 8px 24px -16px rgba(28,36,48,.28);
-  }
-
   *{box-sizing:border-box;}
-  body,h1,h2,h3,p,ul,ol,figure,pre{margin:0;}
+  html{color-scheme:light;}
+  body,h1,h2,h3,p,ul,ol,pre{margin:0;}
   ul,ol{padding:0;}
   button{font:inherit;}
-
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--gothic);
-    font-size:16px;
-    line-height:1.85;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    background:var(--white);color:var(--ink);
+    font-family:var(--maru);font-weight:500;font-size:15.5px;line-height:1.95;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
   }
-
-  /* .wrap は横方向だけを担当する。縦は section / hero / footer が持つ（shorthand で潰し合わないよう longhand で分離） */
-  .wrap{max-width:760px;margin:0 auto;padding-inline:24px;}
-  .band{border-top:1px solid var(--line);background:var(--surface);}
-  .band--quiet{background:transparent;}
-
-  section{padding-block:64px;}
-  .stack{display:flex;flex-direction:column;gap:20px;}
+  .wrap{max-width:680px;margin:0 auto;padding-inline:22px;}
+  section{padding-block:72px;position:relative;}
+  .stack{display:flex;flex-direction:column;gap:22px;}
   .stack-sm{display:flex;flex-direction:column;gap:10px;}
-  .stack-lg{display:flex;flex-direction:column;gap:36px;}
+  .stack-lg{display:flex;flex-direction:column;gap:40px;}
+  .center{text-align:center;}
+  .center p{margin-inline:auto;}
 
-  /* ---- type ---- */
-  h1,h2,h3{font-family:var(--mincho);font-weight:600;text-wrap:balance;line-height:1.45;}
-  h1{font-size:clamp(30px,6.2vw,46px);letter-spacing:.01em;}
-  h2{font-size:clamp(21px,3.6vw,27px);letter-spacing:.02em;}
-  h3{font-size:17px;letter-spacing:.02em;}
-  p{max-width:64ch;}
-  .lede{font-size:17px;color:var(--ink-2);max-width:60ch;}
-  .eyebrow{
-    font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--ai);display:block;
-  }
+  h1,h2,h3{font-weight:900;line-height:1.45;text-wrap:balance;letter-spacing:.02em;}
+  h1{font-size:clamp(28px,6.4vw,42px);}
+  h2{font-size:clamp(22px,4.6vw,30px);}
+  h3{font-size:17px;font-weight:700;}
+  p{max-width:60ch;}
+  .lede{color:var(--ink-2);font-size:15.5px;max-width:56ch;}
   .muted{color:var(--ink-2);}
-  .small{font-size:13.5px;line-height:1.75;color:var(--ink-2);}
-  strong{font-weight:700;}
-  code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);
-       padding:.12em .4em;border-radius:3px;letter-spacing:0;}
+  .small{font-size:13.5px;line-height:1.8;color:var(--ink-2);}
+  strong{font-weight:700;color:var(--ink);}
+  .hl{background:linear-gradient(transparent 62%,var(--yellow) 62%);padding:0 .1em;}
+  code{font-family:var(--mono);font-size:.86em;background:var(--pink-bg);color:var(--pink-deep);
+       padding:.1em .45em;border-radius:6px;font-weight:600;}
+
+  /* 手書き英字の見出し飾り */
+  .script{
+    font-family:var(--script);font-weight:700;color:var(--pink-deep);
+    font-size:30px;line-height:1;display:block;letter-spacing:.01em;
+  }
+  .script--big{font-size:clamp(44px,10vw,64px);}
+  .eyebrow{
+    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.2em;
+    color:var(--pink-deep);background:var(--white);border:1.5px solid var(--pink);
+    border-radius:999px;padding:3px 14px;
+  }
+  .dots{display:flex;justify-content:center;gap:8px;margin-top:4px;}
+  .dots i{width:7px;height:7px;border-radius:50%;background:var(--pink);display:block;}
+  .dots i:nth-child(2){background:var(--yellow);}
+  .dots i:nth-child(3){background:var(--blue);}
+
+  /* 帯 */
+  .band-pink{background:var(--pink-bg);}
+  .band-yellow{background:var(--yellow-bg);}
+  .band-blue{background:var(--blue-bg);}
+  .band-white{background:var(--white);}
+
+  /* ぼかしの色玉 */
+  .blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.75;pointer-events:none;z-index:0;}
+  .blob--pink{background:#FFC2D2;}
+  .blob--yellow{background:#FFF3A3;}
+  .blob--blue{background:#CBE9F8;}
+  .rel{position:relative;z-index:1;}
+
+  /* きらきら */
+  .spark{position:absolute;font-size:22px;color:var(--pink);pointer-events:none;z-index:1;animation:tw 2.6s ease-in-out infinite;}
+  .spark--y{color:#F5D24B;}
+  .spark--b{color:var(--blue);}
+  @keyframes tw{0%,100%{opacity:.35;transform:scale(.85) rotate(0deg);}50%{opacity:1;transform:scale(1.1) rotate(12deg);}}
 
   /* ---- hero ---- */
-  .hero{padding-top:clamp(56px,11vw,104px);padding-bottom:60px;}
-  .hero h1{margin-top:14px;}
-  .hero-sub{margin-top:22px;}
-  .rule{height:1px;background:var(--line-strong);margin:34px 0 0;max-width:120px;}
-
-  .dl{
-    text-decoration:none;
-    display:inline-flex;align-items:center;gap:12px;
-    background:var(--ai);color:var(--bg);
-    border:none;border-radius:2px;
-    font-family:var(--gothic);font-size:15px;font-weight:700;
-    padding:14px 26px;cursor:pointer;
-    box-shadow:var(--shadow);
-    transition:transform .12s ease, filter .12s ease;
+  .hero{
+    background:var(--pink-bg);padding-block:clamp(64px,12vw,110px) 72px;
+    position:relative;overflow:hidden;text-align:center;
   }
-  .dl:hover{filter:brightness(1.12);transform:translateY(-1px);}
-  .dl:active{transform:translateY(0);}
-  .dl:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;}
-  .dl-meta{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:12px;}
-  .dl-row{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:30px;}
-
-  /* ---- lists ---- */
-  ul.plain{list-style:none;display:flex;flex-direction:column;gap:12px;}
-  ul.plain > li{padding-left:20px;position:relative;max-width:64ch;}
-  ul.plain > li::before{
-    content:"";position:absolute;left:2px;top:.78em;
-    width:6px;height:6px;background:var(--ai);border-radius:1px;
+  .hero .wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .logo{
+    font-family:var(--maru);font-weight:900;font-size:clamp(34px,9vw,58px);letter-spacing:.04em;
+    color:var(--pink-deep);line-height:1;text-shadow:0 3px 0 #fff;
   }
-
-  /* ---- built artifacts ---- */
-  .built{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;
-         background:var(--line);border:1px solid var(--line);}
-  .built > div{background:var(--surface);padding:20px 20px 22px;}
-  .band .built > div{background:var(--bg);}
-  .built h3{margin-bottom:6px;}
-  .built p{font-size:13.5px;color:var(--ink-2);line-height:1.7;}
-
-  /* ---- two-layer log diagram ---- */
-  .layers{display:grid;gap:14px;margin-top:8px;}
-  .layer{
-    border:1px solid var(--line);background:var(--bg);
-    padding:18px 20px;display:grid;gap:10px;
+  .logo span{color:var(--ink);}
+  .hero h1{margin-top:6px;}
+  .hero .lede{margin-inline:auto;}
+  .btn{
+    text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--pink);color:#fff;border:none;border-radius:999px;
+    font-family:var(--maru);font-weight:900;font-size:16px;letter-spacing:.06em;
+    padding:16px 40px;box-shadow:var(--shadow);cursor:pointer;
+    transition:transform .14s ease,filter .14s ease;
   }
-  .band .layer{background:var(--surface);}
-  .layer-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .btn:hover{filter:brightness(1.05);transform:translateY(-2px);}
+  .btn:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;}
+  .btn--line{background:#fff;color:var(--pink-deep);border:2px solid var(--pink);box-shadow:none;font-weight:700;}
+  .btn-meta{font-size:12px;color:var(--ink-3);letter-spacing:.06em;margin-top:8px;font-family:var(--mono);}
+
+  /* ---- cards ---- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+  .card{
+    background:#fff;border:2px solid var(--line);border-radius:22px;padding:22px 20px 20px;
+    box-shadow:0 6px 18px -12px rgba(240,122,155,.35);position:relative;
+  }
+  .card .ico{
+    width:44px;height:44px;border-radius:50%;background:var(--pink-bg);color:var(--pink-deep);
+    display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;
+  }
+  .card h3{margin-bottom:6px;}
+  .card p{font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+
+  /* ---- ステッカー番号 ---- */
+  .sticker{
+    width:54px;height:54px;border-radius:50%;background:var(--pink);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-weight:900;line-height:1;box-shadow:0 4px 0 #F5C6D2;transform:rotate(-8deg);flex:0 0 auto;
+    border:3px solid #fff;outline:2px solid var(--pink);
+  }
+  .sticker small{font-size:8px;letter-spacing:.15em;font-weight:700;}
+  .sticker b{font-size:22px;}
+
+  /* ---- 主張の流れ（丸い背景の中） ---- */
+  .core{
+    position:relative;overflow:hidden;
+  }
+  .core::before{
+    content:"";position:absolute;left:50%;top:-8%;width:170vw;height:170vw;max-width:1500px;max-height:1500px;
+    transform:translateX(-50%);border-radius:50%;background:var(--pink-bg);z-index:0;
+  }
+  .flow{display:flex;flex-direction:column;align-items:stretch;gap:0;}
+  .flow-box{
+    background:#fff;border:2px solid var(--line);border-radius:22px;padding:20px 22px;
+    display:flex;flex-direction:column;gap:8px;box-shadow:0 6px 18px -12px rgba(240,122,155,.35);
+  }
+  .flow-box--main{border-color:var(--pink);border-width:3px;}
+  .flow-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .flow-title{font-weight:900;font-size:17px;}
   .tag{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-    border:1px solid var(--line-strong);color:var(--ink-3);padding:2px 7px;border-radius:2px;white-space:nowrap;
+    font-size:11px;font-weight:700;letter-spacing:.1em;border-radius:999px;padding:2px 10px;
+    background:var(--yellow-bg);color:#9A7B00;border:1px solid #F1E28A;
   }
-  .tag--grow{border-color:var(--ochre);color:var(--ochre);background:var(--ochre-soft);}
-  .layer-title{font-family:var(--mono);font-size:14.5px;font-weight:600;}
-  .layer p{font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0;}
-  .files{display:flex;flex-wrap:wrap;gap:8px;}
-  .file{
-    font-family:var(--mono);font-size:12.5px;
-    border:1px solid var(--line-strong);background:var(--surface-2);
-    padding:3px 9px;border-radius:2px;white-space:nowrap;
+  .tag--pink{background:var(--pink-bg);color:var(--pink-deep);border-color:var(--pink-soft);}
+  .tag--blue{background:var(--blue-bg);color:#2C7DA8;border-color:#BBDFF2;}
+  .flow-box p{font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{font-size:12px;font-weight:700;background:var(--pink-bg);color:var(--pink-deep);border-radius:999px;padding:3px 11px;}
+  .flow-arrow{
+    align-self:center;display:flex;flex-direction:column;align-items:center;gap:2px;
+    color:var(--pink-deep);font-size:12px;font-weight:700;padding:10px 0;letter-spacing:.08em;
   }
-  .arrow-down{
-    display:flex;align-items:center;gap:10px;color:var(--ink-3);
-    font-size:12.5px;font-family:var(--mono);padding-left:2px;
-  }
-  .arrow-down span{flex:0 0 auto;}
-  .arrow-down::after{content:"";height:1px;background:var(--line-strong);flex:1;}
+  .flow-arrow::after{content:"▼";font-size:14px;}
 
-  .states{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:4px;}
-  .state{
-    font-size:12.5px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap;
-    border:1px solid var(--line-strong);color:var(--ink-2);background:var(--surface-2);
+  /* ---- 吹き出しメモ ---- */
+  .memo{
+    background:#fff;border:2px dashed var(--pink);border-radius:20px;padding:18px 20px;
+    display:flex;flex-direction:column;gap:6px;position:relative;
   }
-  .state--now{border-color:var(--ochre);color:var(--ochre);background:var(--ochre-soft);}
-  .state-sep{color:var(--ink-3);font-family:var(--mono);font-size:12px;}
+  .memo::before{
+    content:"MEMO";position:absolute;top:-12px;left:18px;background:var(--pink);color:#fff;
+    font-size:10px;font-weight:900;letter-spacing:.2em;border-radius:999px;padding:3px 10px;
+  }
+  .memo h3{font-size:15px;}
+  .memo p{font-size:13.5px;color:var(--ink-2);line-height:1.8;}
 
   /* ---- steps ---- */
-  ol.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:30px;}
-  ol.steps > li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:16px;}
-  ol.steps > li::before{
-    content:counter(s);font-family:var(--mono);font-size:12px;font-weight:700;
-    color:var(--ai);border-top:2px solid var(--ai);padding-top:8px;line-height:1;
+  ol.steps{list-style:none;display:flex;flex-direction:column;gap:22px;}
+  ol.steps > li{
+    display:grid;grid-template-columns:54px 1fr;gap:16px;align-items:start;
+    background:#fff;border:2px solid var(--line);border-radius:22px;padding:20px 20px 20px 16px;
   }
-  .step-body{display:flex;flex-direction:column;gap:12px;min-width:0;}
+  .step-body{display:flex;flex-direction:column;gap:10px;min-width:0;}
+  .step-body h3{padding-top:8px;}
 
   /* ---- code ---- */
-  .code{
-    position:relative;background:var(--surface-2);border:1px solid var(--line);
-    border-radius:2px;overflow:hidden;
-  }
-  /* 短い1行コマンドなので、横スクロールさせるより折り返した方が読みやすい */
+  .code{position:relative;background:var(--pink-bg-2);border:1.5px solid var(--line);border-radius:14px;overflow:hidden;}
   .code pre{
-    font-family:var(--mono);font-size:13px;line-height:1.75;
-    padding:14px 62px 14px 16px;color:var(--ink);
+    font-family:var(--mono);font-size:13px;line-height:1.7;padding:13px 76px 13px 16px;color:var(--ink);
     white-space:pre-wrap;overflow-wrap:break-word;
   }
   .copy{
-    position:absolute;top:7px;right:7px;
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
-    background:var(--bg);color:var(--ink-2);border:1px solid var(--line-strong);
-    border-radius:2px;padding:4px 8px;cursor:pointer;transition:color .12s ease,border-color .12s ease;
+    position:absolute;top:8px;right:8px;font-family:var(--maru);font-size:11px;font-weight:900;letter-spacing:.1em;
+    background:#fff;color:var(--pink-deep);border:1.5px solid var(--pink);border-radius:999px;
+    padding:4px 11px;cursor:pointer;transition:background .12s,color .12s;
   }
-  .copy:hover{color:var(--ai);border-color:var(--ai);}
-  .copy:focus-visible{outline:2px solid var(--ai);outline-offset:2px;}
+  .copy:hover{background:var(--pink);color:#fff;}
 
-  /* ---- night timeline ---- */
-  .night{
-    border:1px solid var(--line);background:var(--bg);padding:24px 22px;
-    display:flex;flex-direction:column;gap:0;
+  /* ---- .md 説明 ---- */
+  .md-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;}
+  .md-card{
+    background:#fff;border-radius:22px;padding:22px 18px 20px;text-align:center;
+    border:2px solid #FFF0A8;display:flex;flex-direction:column;gap:8px;align-items:center;
   }
-  .band .night{background:var(--surface);}
-  .tl{display:grid;grid-template-columns:64px 1fr;gap:0 16px;}
-  .tl-time{
-    font-family:var(--mono);font-size:12.5px;color:var(--ink-3);
-    font-variant-numeric:tabular-nums;padding-top:14px;text-align:right;
+  .md-card .sym{
+    font-family:var(--mono);font-weight:700;font-size:28px;color:var(--pink-deep);
+    background:var(--pink-bg);border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center;
   }
-  .tl-line{
-    border-left:1px solid var(--line-strong);padding:14px 0 14px 20px;position:relative;
-  }
-  .tl-line::before{
-    content:"";position:absolute;left:-4.5px;top:20px;width:8px;height:8px;
-    border-radius:50%;background:var(--line-strong);
-  }
-  .tl-hit::before{background:var(--ai);box-shadow:0 0 0 4px var(--ai-soft);}
-  .tl-miss::before{background:var(--bg);border:1px solid var(--line-strong);}
-  .band .tl-miss::before{background:var(--surface);}
-  .tl-line strong{display:block;font-size:14.5px;}
-  .tl-line p{font-size:13px;color:var(--ink-2);line-height:1.7;margin-top:2px;}
-  .tl:last-child .tl-line{padding-bottom:0;border-left-color:transparent;}
+  .md-card h3{font-size:15px;}
+  .md-card p{font-size:13px;color:var(--ink-2);line-height:1.75;}
 
-  /* ---- 伝え方の例（そのまま口に出せる一文として見せる） ---- */
-  ul.says{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  /* ---- 手順リスト ---- */
+  ul.plain{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  ul.plain > li{
+    background:#fff;border-radius:16px;padding:14px 16px 14px 46px;position:relative;
+    font-size:14.5px;line-height:1.8;color:var(--ink-2);border:1.5px solid var(--line);
+  }
+  ul.plain > li::before{
+    content:"✓";position:absolute;left:14px;top:13px;width:22px;height:22px;border-radius:50%;
+    background:var(--pink);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;
+  }
+  ul.plain.num{counter-reset:n;}
+  ul.plain.num > li{counter-increment:n;}
+  ul.plain.num > li::before{content:counter(n);}
+
+  /* ---- 6フェーズ ---- */
+  .phases{display:flex;flex-direction:column;gap:0;position:relative;}
+  .phase{display:grid;grid-template-columns:54px 1fr;gap:16px;align-items:start;padding:8px 0 20px;position:relative;}
+  .phase::before{
+    content:"";position:absolute;left:26px;top:60px;bottom:-6px;border-left:3px dotted var(--pink-soft);
+  }
+  .phase:last-child::before{display:none;}
+  .phase-body{background:#fff;border-radius:18px;padding:14px 18px;border:2px solid var(--line);}
+  .phase-body strong{display:block;font-size:15.5px;margin-bottom:2px;}
+  .phase-body p{font-size:13.5px;color:var(--ink-2);line-height:1.8;}
+
+  /* ---- そのまま言える一言 ---- */
+  ul.says{list-style:none;display:flex;flex-direction:column;gap:10px;}
   ul.says > li{
-    font-size:14.5px;line-height:1.7;color:var(--ink);
-    border-left:2px solid var(--ai);background:var(--surface-2);
-    padding:9px 14px;max-width:56ch;
+    background:#fff;border-radius:999px;padding:10px 20px;font-size:14px;font-weight:700;color:var(--ink);
+    border:2px solid var(--pink-soft);align-self:flex-start;max-width:100%;
   }
-  ul.says > li::before{content:"「";color:var(--ink-3);}
-  ul.says > li::after{content:"」";color:var(--ink-3);}
-
-  /* ---- callout ---- */
-  .note{
-    border-left:2px solid var(--ochre);background:var(--ochre-soft);
-    padding:16px 18px;display:flex;flex-direction:column;gap:8px;
-  }
-  .note h3{font-family:var(--gothic);font-size:14.5px;font-weight:700;color:var(--ink);}
-  .note p{font-size:13.5px;color:var(--ink-2);line-height:1.75;margin:0;}
+  ul.says > li::before{content:"「";color:var(--pink);}
+  ul.says > li::after{content:"」";color:var(--pink);}
+  ul.says > li:nth-child(even){align-self:flex-end;border-color:#BBDFF2;}
 
   /* ---- tree ---- */
   .tree{
-    font-family:var(--mono);font-size:12.5px;line-height:1.95;
-    background:var(--surface-2);border:1px solid var(--line);
-    padding:18px 16px;overflow-x:auto;white-space:pre;color:var(--ink-2);
+    font-family:var(--mono);font-size:12.5px;line-height:1.95;background:#fff;
+    border:2px solid var(--line);border-radius:18px;padding:18px 16px;overflow-x:auto;white-space:pre;color:var(--ink-2);
   }
-  .tree b{color:var(--ink);font-weight:600;}
+  .tree b{color:var(--pink-deep);font-weight:700;}
 
-  footer{border-top:1px solid var(--line);padding-block:34px 56px;}
-  footer p{font-size:12.5px;color:var(--ink-3);font-family:var(--mono);}
+  footer{
+    background:var(--pink-bg);padding-block:56px 48px;text-align:center;position:relative;overflow:hidden;
+  }
+  footer p{font-size:12px;color:var(--ink-3);letter-spacing:.1em;font-family:var(--mono);}
 
   @media (max-width:560px){
-    /* 狭い画面では見出しの手動改行をやめ、text-wrap:balance に任せる */
     .br-wide{display:none;}
+    section{padding-block:56px;}
+    ol.steps > li{grid-template-columns:46px 1fr;gap:12px;padding:16px 14px 16px 12px;}
+    .sticker{width:46px;height:46px;}
+    .sticker b{font-size:19px;}
+    .phase{grid-template-columns:46px 1fr;gap:12px;}
+    .phase::before{left:22px;}
   }
-  @media (max-width:600px){
-    section{padding-block:48px;}
-    .tl{grid-template-columns:52px 1fr;gap:0 10px;}
-    .tl-line{padding-left:16px;}
-    ol.steps > li{grid-template-columns:26px 1fr;gap:12px;}
-  }
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none !important;animation:none !important;}
-  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
 </style>
 </head>
 <body>
 
-<header class="wrap hero">
-  <span class="eyebrow">Claude Code skill / note-builder</span>
-  <h1>ノートを、企画から<br class="br-wide">セールスレターまで。</h1>
-  <p class="lede hero-sub">
-    「何を書くか」を質問で引き出して、核となる主張を決め、目次を組み、本編を1章ずつ書き、最後にセールスレターを作る——
-    有料ノート（note / Brain）を作る手順を、Claude&nbsp;Code の質問に答えるだけで進められるスキルです。
-    できあがった本編は、<strong>そのまま note に貼るだけ</strong>です。
-  </p>
-  <div class="dl-row">
+<header class="hero">
+  <div class="blob blob--pink" style="width:360px;height:360px;left:-120px;top:-80px"></div>
+  <div class="blob blob--yellow" style="width:320px;height:320px;right:-110px;top:40px"></div>
+  <div class="blob blob--blue" style="width:260px;height:260px;left:30%;bottom:-140px"></div>
+  <span class="spark" style="left:8%;top:18%">✦</span>
+  <span class="spark spark--y" style="right:10%;top:12%;animation-delay:.8s">✦</span>
+  <span class="spark spark--b" style="left:14%;bottom:16%;animation-delay:1.4s">✦</span>
+  <span class="spark" style="right:14%;bottom:22%;animation-delay:.4s">✦</span>
+
+  <div class="wrap">
+    <span class="script script--big">for note &amp; Brain</span>
+    <div class="logo">note<span>-</span>builder</div>
+    <h1>ノートを、企画から<br class="br-wide">セールスレターまで。</h1>
+    <p class="lede">
+      「何を書くか」を質問で引き出して、核となる主張を決め、目次を組み、本編を1章ずつ書き、最後にセールスレターを作る。
+      有料ノート（note / Brain）を作る手順を、Claude&nbsp;Code の質問に答えるだけで進められるスキルです。
+      できあがった本編は、<strong class="hl">そのまま note に貼るだけ</strong>。
+    </p>
     <div>
-      <a class="dl" id="dl" href="note-builder.zip" download>スキルをダウンロード</a>
-      <div class="dl-meta" id="dlmeta">note-builder.zip / 20&nbsp;KB</div>
+      <a class="btn" href="note-builder.zip" download>スキルをダウンロード</a>
+      <div class="btn-meta">note-builder.zip / 20 KB / 無料</div>
     </div>
   </div>
-  <div class="rule"></div>
 </header>
 
-<div class="band">
-  <section class="wrap stack">
-    <div class="stack-sm">
-      <span class="eyebrow">これは何か</span>
-      <h2>「文章を書いてくれる道具」ではなく、「ノートの作り方を順番に進めてくれる道具」です。</h2>
+<section class="band-white">
+  <div class="wrap stack">
+    <div class="stack-sm center">
+      <span class="script">what is this?</span>
+      <h2>「文章を書いてくれる道具」ではなく<br class="br-wide">「ノートの作り方を順番に進めてくれる道具」</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
     </div>
-    <p class="muted">
+    <p class="muted center">
       <code>/note-builder</code> と打つと、Claude が質問を始めます。
-      誰に売るのか、特典は決まっているか、知識をまとめたファイルはあるか、実績の数字はどれか——
+      誰に売るのか、特典は決まっているか、知識をまとめたファイルはあるか、実績の数字はどれか。
       答え終わると、<strong>主張 → 目次 → 本編 → セールスレター</strong> の順に、あなたの承認を取りながら進みます。
     </p>
-    <p class="muted">勝手に先へは進みません。目次は納得するまで直せますし、本編は1章ずつ確認してから次に行きます。</p>
+    <p class="muted center">勝手に先へは進みません。目次は納得するまで直せますし、本編は1章ずつ確認してから次に行きます。</p>
 
-    <div class="built">
-      <div>
-        <h3>知識のまとめ</h3>
-        <p>質問の答えと、すでに持っているファイルを1枚に並べ直したもの。本編の材料になります。</p>
-      </div>
-      <div>
-        <h3>企画書</h3>
-        <p>核となる主張・特典・目次。ノートの背骨です。修正はここで受けます。</p>
-      </div>
-      <div>
-        <h3>本編（1ファイル）</h3>
-        <p>章ごとに書いて、同じファイルに足していきます。開いて全部コピーして、note に貼るだけ。</p>
-      </div>
-      <div>
-        <h3>図解の指示書</h3>
-        <p>本編のどこに、どんな図を入れるか。要素とキャプションまで書いてあるので、Canva で作れます。</p>
-      </div>
-      <div>
-        <h3>セールスレター</h3>
-        <p>本編が全部できてから作ります。主張と矛盾していないかの確認表つきです。</p>
-      </div>
+    <div class="cards">
+      <div class="card"><div class="ico">📚</div><h3>知識のまとめ</h3><p>質問の答えと、すでに持っているファイルを1枚に並べ直したもの。本編の材料になります。</p></div>
+      <div class="card"><div class="ico">🧭</div><h3>企画書</h3><p>核となる主張・特典・目次。ノートの背骨です。修正はここで受けます。</p></div>
+      <div class="card"><div class="ico">📝</div><h3>本編（1ファイル）</h3><p>章ごとに書いて、同じファイルに足していきます。開いて全部コピーして、note に貼るだけ。</p></div>
+      <div class="card"><div class="ico">🎨</div><h3>図解の指示書</h3><p>本編のどこに、どんな図を入れるか。要素とキャプションまで書いてあるので、Canva で作れます。</p></div>
+      <div class="card"><div class="ico">💌</div><h3>セールスレター</h3><p>本編が全部できてから作ります。主張と矛盾していないかの確認表つきです。</p></div>
     </div>
-  </section>
-</div>
-
-<section class="wrap stack-lg">
-  <div class="stack-sm">
-    <span class="eyebrow">設計の核</span>
-    <h2>目次より先に、「主張」を決める。</h2>
-    <p class="lede">
-      ノートが途中で薄くなるのは、章を並べてから書く理由を探すからです。
-      このスキルは順番を逆にしています。
-    </p>
-  </div>
-
-  <div class="layers">
-    <div class="layer">
-      <div class="layer-head">
-        <span class="layer-title">核となる主張</span>
-        <span class="tag tag--grow">最初に決める</span>
-      </div>
-      <p>「○○だけでは△△になる。だから□□が必要」——一文で言える形にします。
-        例：「Threads だけだと垢バンで全部消える。だから X も同時に育てる。だから X の伸ばし方を知る必要がある」</p>
-      <div class="files">
-        <span class="file">根拠 3つ</span>
-        <span class="file">反論と回答</span>
-        <span class="file">敵と味方</span>
-        <span class="file">読者が翌日やること</span>
-      </div>
-    </div>
-
-    <div class="arrow-down"><span>この主張から外れないように</span></div>
-
-    <div class="layer">
-      <div class="layer-head">
-        <span class="layer-title">目次</span>
-        <span class="tag">主張の証明の順番</span>
-      </div>
-      <p>各章に「この章は主張のどの根拠を証明するのか」を付けます。どの根拠にも繋がらない章は削られます。</p>
-    </div>
-
-    <div class="arrow-down"><span>目次が確定してから</span></div>
-
-    <div class="layer">
-      <div class="layer-head">
-        <span class="layer-title">本編 → セールスレター</span>
-        <span class="tag">最後に作る</span>
-      </div>
-      <p>レターは本編が全部できてから、実際の見出しを見て書きます。
-        末尾に「主張の各要素をレターのどこで回収したか」の表が付き、空欄があるうちは完成にしません。</p>
-    </div>
-  </div>
-
-  <div class="note">
-    <h3>特典は、いちばん最初に聞きます</h3>
-    <p>
-      特典が決まっているなら、知識を整理する段階から「本編のどこで特典に繋げるか」を織り込みます。
-      決まっていなければ、主張を実行する手段になるものを目次の段階で3案出します。
-    </p>
   </div>
 </section>
 
-<div class="band">
-  <section class="wrap stack-lg">
-    <div class="stack-sm">
-      <span class="eyebrow">導入</span>
+<section class="core">
+  <span class="spark spark--y" style="left:6%;top:6%">✦</span>
+  <span class="spark spark--b" style="right:8%;top:10%;animation-delay:1s">✦</span>
+  <div class="wrap stack-lg rel">
+    <div class="stack-sm center">
+      <span class="script">the core idea</span>
+      <h2>目次より先に、「主張」を決める。</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
+      <p class="lede center">ノートが途中で薄くなるのは、章を並べてから書く理由を探すからです。このスキルは順番を逆にしています。</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-box flow-box--main">
+        <div class="flow-head"><span class="flow-title">核となる主張</span><span class="tag tag--pink">最初に決める</span></div>
+        <p>「○○だけでは△△になる。だから□□が必要」。一文で言える形にします。<br>
+          例：「Threads だけだと垢バンで全部消える。だから X も同時に育てる。だから X の伸ばし方を知る必要がある」</p>
+        <div class="chips"><span class="chip">根拠 3つ</span><span class="chip">反論と回答</span><span class="chip">敵と味方</span><span class="chip">読者が翌日やること</span></div>
+      </div>
+      <div class="flow-arrow">この主張から外れないように</div>
+      <div class="flow-box">
+        <div class="flow-head"><span class="flow-title">目次</span><span class="tag">主張の証明の順番</span></div>
+        <p>各章に「この章は主張のどの根拠を証明するのか」を付けます。どの根拠にも繋がらない章は削られます。</p>
+      </div>
+      <div class="flow-arrow">目次が確定してから</div>
+      <div class="flow-box">
+        <div class="flow-head"><span class="flow-title">本編 → セールスレター</span><span class="tag tag--blue">最後に作る</span></div>
+        <p>レターは本編が全部できてから、実際の見出しを見て書きます。末尾に「主張の各要素をレターのどこで回収したか」の表が付き、空欄があるうちは完成にしません。</p>
+      </div>
+    </div>
+
+    <div class="memo">
+      <h3>特典は、いちばん最初に聞きます</h3>
+      <p>特典が決まっているなら、知識を整理する段階から「本編のどこで特典に繋げるか」を織り込みます。決まっていなければ、主張を実行する手段になるものを目次の段階で3案出します。</p>
+    </div>
+  </div>
+</section>
+
+<section class="band-yellow">
+  <div class="blob blob--pink" style="width:280px;height:280px;right:-100px;top:-60px;opacity:.5"></div>
+  <div class="wrap stack-lg rel">
+    <div class="stack-sm center">
+      <span class="script">how to start</span>
       <h2>置いて、打つ。それだけです。</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
     </div>
 
     <ol class="steps">
       <li>
+        <div class="sticker"><small>STEP</small><b>1</b></div>
         <div class="step-body">
           <h3>zip を解凍して、フォルダごと置く</h3>
-          <p class="small">解凍すると <code>note-builder</code> というフォルダが出てきます。どのプロジェクトでも使えるように、ここへ置くのがおすすめです:</p>
-          <div class="code">
-            <pre>~/.claude/skills/note-builder/</pre>
-            <button class="copy" type="button">COPY</button>
-          </div>
-          <p class="small">
-            <code>~</code> は「自分のホームフォルダ」のことです。Finder で「移動」→「フォルダへ移動」に <code>~/.claude</code> と入れると開けます。
-            <code>skills</code> フォルダがなければ作ってください。
-          </p>
+          <p class="small">解凍すると <code>note-builder</code> というフォルダが出てきます。どのプロジェクトでも使えるように、ここへ置くのがおすすめです。</p>
+          <div class="code"><pre>~/.claude/skills/note-builder/</pre><button class="copy" type="button">COPY</button></div>
+          <p class="small"><code>~</code> は「自分のホームフォルダ」のことです。Finder で「移動」→「フォルダへ移動」に <code>~/.claude</code> と入れると開けます。<code>skills</code> フォルダがなければ作ってください。</p>
           <p class="small">特定のフォルダの中だけで使いたいなら、そのフォルダの中の <code>.claude/skills/note-builder/</code> に置きます。</p>
         </div>
       </li>
       <li>
+        <div class="sticker"><small>STEP</small><b>2</b></div>
         <div class="step-body">
           <h3>Claude Code を開き直して、呼び出す</h3>
-          <div class="code">
-            <pre>/note-builder</pre>
-            <button class="copy" type="button">COPY</button>
-          </div>
-          <p class="small">
-            「ノート作りたい」「有料 note を書きたい」「目次を考えて」でも起動します。
-            ノートの名前を付けたいときは <code>/note-builder Xの伸ばし方</code> のように続けて書きます。
-          </p>
+          <div class="code"><pre>/note-builder</pre><button class="copy" type="button">COPY</button></div>
+          <p class="small">「ノート作りたい」「有料 note を書きたい」「目次を考えて」でも起動します。ノートの名前を付けたいときは <code>/note-builder Xの伸ばし方</code> のように続けて書きます。</p>
         </div>
       </li>
       <li>
+        <div class="sticker"><small>STEP</small><b>3</b></div>
         <div class="step-body">
           <h3>質問に答える</h3>
-          <p class="small">
-            一度に来る質問は 3〜5 個です。数字が曖昧なら「だいたい」で構いません。あとで【要記入】として残ります。
-            知識をまとめたファイルがあれば、その場所を伝えると全部読んでくれます。
-          </p>
+          <p class="small">一度に来る質問は 3〜5 個です。数字が曖昧なら「だいたい」で構いません。あとで【要記入】として残ります。知識をまとめたファイルがあれば、その場所を伝えると全部読んでくれます。</p>
         </div>
       </li>
       <li>
+        <div class="sticker"><small>STEP</small><b>4</b></div>
         <div class="step-body">
           <h3>途中でやめても、続きから</h3>
-          <div class="code">
-            <pre>/note-builder</pre>
-            <button class="copy" type="button">COPY</button>
-          </div>
-          <p class="small">
-            進み具合は <code>_state.md</code> というファイルに残ります。次の日にもう一度同じコマンドを打てば、前回の続きから始まります。
-          </p>
+          <div class="code"><pre>/note-builder</pre><button class="copy" type="button">COPY</button></div>
+          <p class="small">進み具合は <code>_state.md</code> というファイルに残ります。次の日にもう一度同じコマンドを打てば、前回の続きから始まります。</p>
         </div>
       </li>
     </ol>
-  </section>
-</div>
-
-<section class="wrap stack-lg">
-  <div class="stack-sm">
-    <span class="eyebrow">.md って何？</span>
-    <h2>ただの文章ファイルです。<br class="br-wide">メモ帳でも開けます。</h2>
-    <p class="lede">
-      できあがるファイルは全部 <code>.md</code> という拡張子です。
-      特別なソフトはいりません。<strong>中身は普通の文章</strong>で、いくつかの記号にだけ意味があります。
-    </p>
-  </div>
-
-  <div class="night">
-    <div class="tl">
-      <div class="tl-time">#</div>
-      <div class="tl-line tl-hit">
-        <strong>行の頭の <code>#</code> は「見出し」の印</strong>
-        <p><code>#</code> が1つで章タイトル、<code>##</code> で節、<code>###</code> で小さな見出しです。note に貼ると見出しとして扱われます。</p>
-      </div>
-    </div>
-    <div class="tl">
-      <div class="tl-time">**</div>
-      <div class="tl-line tl-hit">
-        <strong><code>**太字**</code> のように囲むと「太字」</strong>
-        <p>行の頭の <code>-</code> は箇条書き、<code>&gt;</code> は引用です。これ以外の記号はほとんど使いません。</p>
-      </div>
-    </div>
-    <div class="tl">
-      <div class="tl-time">開く</div>
-      <div class="tl-line tl-hit">
-        <strong>Mac なら「テキストエディット」、Windows なら「メモ帳」で開けます</strong>
-        <p>Obsidian や VS Code のようなアプリを使うと見出しが整って見えますが、なくても困りません。</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="stack-sm">
-    <h3>note に貼るまでの手順</h3>
-    <ul class="plain">
-      <li><strong><code>10_本編.md</code> を開いて、全部選択してコピー</strong>します。note の本文にそのまま貼ります。</li>
-      <li><strong>見出しがちゃんと見出しになっているか</strong>を確認します。なっていなければ、その行を選んで note の見出しボタンを押してください。</li>
-      <li>本文の中の <strong>【図解1｜フロー図】〜</strong> のような行は、画像を入れる目印です。<code>03_図解計画.md</code> の指示書どおりに画像を作って、その行と差し替えます。</li>
-      <li><strong><code>=====ここから有料=====</code></strong> という行は、有料ラインの目印です。この行を消して、note の「有料エリア設定」をその位置にします。</li>
-      <li>セールスレター（<code>11_セールスレター.md</code>）は、有料ラインより上の無料部分に貼ります。</li>
-    </ul>
-  </div>
-
-  <div class="note">
-    <h3>本編は「章ごとに別ファイル」にはなりません</h3>
-    <p>
-      章ごとに書きますが、書き足していく先は <code>10_本編.md</code> の1ファイルだけです。
-      コピペが1回で済むように、そうしています。
-    </p>
   </div>
 </section>
 
-<div class="band">
-  <section class="wrap stack-lg">
-    <div class="stack-sm">
-      <span class="eyebrow">流れ</span>
-      <h2>6つのフェーズを、承認を取りながら進みます。</h2>
+<section class="band-white">
+  <div class="wrap stack-lg">
+    <div class="stack-sm center">
+      <span class="script">what is .md ?</span>
+      <h2>ただの文章ファイルです。<br class="br-wide">メモ帳でも開けます。</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
+      <p class="lede center">できあがるファイルは全部 <code>.md</code> という拡張子です。特別なソフトはいりません。<strong>中身は普通の文章</strong>で、いくつかの記号にだけ意味があります。</p>
     </div>
 
-    <div class="night">
-      <div class="tl">
-        <div class="tl-time">1</div>
-        <div class="tl-line tl-hit">
-          <strong>ヒアリング</strong>
-          <p>売る場所、特典、既存ファイル、読者、実績の数字、失敗談。答えはそのまま記録されます。</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="tl-time">2</div>
-        <div class="tl-line tl-hit">
-          <strong>知識の整理</strong>
-          <p>答えと既存ファイルを、読者・実績・知識・失敗談・特典の順に1枚へ並べ直します。抜けがあれば追加で聞かれます。</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="tl-time">3</div>
-        <div class="tl-line tl-hit">
-          <strong>核となる主張</strong>
-          <p>候補が3つ出ます。選ぶか、混ぜるか、直すか。ここが決まるまで目次には進みません。</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="tl-time">4</div>
-        <div class="tl-line tl-hit">
-          <strong>目次と特典案</strong>
-          <p>有料ラインの位置、各章でできるようになること、図解を入れる予定の場所まで入った目次が出ます。納得するまで直せます。</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="tl-time">5</div>
-        <div class="tl-line tl-hit">
-          <strong>本編（1章ずつ）</strong>
-          <p>1回に1章。OK なら本編ファイルに足されます。同時に「ここに、この図解を」の指示書が書かれます。</p>
-        </div>
-      </div>
-      <div class="tl">
-        <div class="tl-time">6</div>
-        <div class="tl-line tl-hit">
-          <strong>セールスレター</strong>
-          <p>本編の実際の見出しから商品説明を書きます。主張との整合チェック表つき。</p>
-        </div>
-      </div>
+    <div class="md-grid">
+      <div class="md-card"><div class="sym">#</div><h3>行の頭の「#」は見出し</h3><p><code>#</code> が1つで章タイトル、<code>##</code> で節、<code>###</code> で小さな見出し。note に貼ると見出しになります。</p></div>
+      <div class="md-card"><div class="sym">**</div><h3>「**」で囲むと太字</h3><p>行の頭の <code>-</code> は箇条書き、<code>&gt;</code> は引用。これ以外の記号はほとんど使いません。</p></div>
+      <div class="md-card"><div class="sym">📄</div><h3>開き方</h3><p>Mac なら「テキストエディット」、Windows なら「メモ帳」で開けます。Obsidian があると見出しが整って見えます。</p></div>
     </div>
 
     <div class="stack-sm">
-      <p class="small">途中で頼めることの例です。</p>
+      <h3 class="center">note に貼るまでの手順</h3>
+      <ul class="plain num">
+        <li><strong><code>10_本編.md</code> を開いて、全部選択してコピー</strong>します。note の本文にそのまま貼ります。</li>
+        <li><strong>見出しがちゃんと見出しになっているか</strong>を確認します。なっていなければ、その行を選んで note の見出しボタンを押してください。</li>
+        <li>本文の中の <strong>【図解1｜フロー図】〜</strong> のような行は、画像を入れる目印です。<code>03_図解計画.md</code> の指示書どおりに画像を作って、その行と差し替えます。</li>
+        <li><strong><code>=====ここから有料=====</code></strong> という行は、有料ラインの目印です。この行を消して、note の「有料エリア設定」をその位置にします。</li>
+        <li>セールスレター（<code>11_セールスレター.md</code>）は、有料ラインより上の無料部分に貼ります。</li>
+      </ul>
+    </div>
+
+    <div class="memo">
+      <h3>本編は「章ごとに別ファイル」にはなりません</h3>
+      <p>章ごとに書きますが、書き足していく先は <code>10_本編.md</code> の1ファイルだけです。コピペが1回で済むように、そうしています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="band-blue">
+  <div class="blob blob--yellow" style="width:260px;height:260px;left:-90px;bottom:-60px;opacity:.6"></div>
+  <span class="spark" style="right:7%;top:8%">✦</span>
+  <div class="wrap stack-lg rel">
+    <div class="stack-sm center">
+      <span class="script">6 phases</span>
+      <h2>6つのフェーズを、<br class="br-wide">承認を取りながら進みます。</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="phases">
+      <div class="phase"><div class="sticker" style="transform:rotate(6deg)"><b>1</b></div><div class="phase-body"><strong>ヒアリング</strong><p>売る場所、特典、既存ファイル、読者、実績の数字、失敗談。答えはそのまま記録されます。</p></div></div>
+      <div class="phase"><div class="sticker"><b>2</b></div><div class="phase-body"><strong>知識の整理</strong><p>答えと既存ファイルを、読者・実績・知識・失敗談・特典の順に1枚へ並べ直します。抜けがあれば追加で聞かれます。</p></div></div>
+      <div class="phase"><div class="sticker" style="transform:rotate(5deg)"><b>3</b></div><div class="phase-body"><strong>核となる主張</strong><p>候補が3つ出ます。選ぶか、混ぜるか、直すか。ここが決まるまで目次には進みません。</p></div></div>
+      <div class="phase"><div class="sticker"><b>4</b></div><div class="phase-body"><strong>目次と特典案</strong><p>有料ラインの位置、各章でできるようになること、図解を入れる予定の場所まで入った目次が出ます。納得するまで直せます。</p></div></div>
+      <div class="phase"><div class="sticker" style="transform:rotate(7deg)"><b>5</b></div><div class="phase-body"><strong>本編（1章ずつ）</strong><p>1回に1章。OK なら本編ファイルに足されます。同時に「ここに、この図解を」の指示書が書かれます。</p></div></div>
+      <div class="phase"><div class="sticker"><b>6</b></div><div class="phase-body"><strong>セールスレター</strong><p>本編の実際の見出しから商品説明を書きます。主張との整合チェック表つき。</p></div></div>
+    </div>
+
+    <div class="stack-sm">
+      <p class="small center">途中で頼めることの例です。</p>
       <ul class="says">
         <li>第3章をもう少し短くして</li>
         <li>目次の第2章と第3章を入れ替えたい</li>
@@ -583,39 +483,32 @@
         <li>この章の図解、比較図じゃなくてフロー図にして</li>
       </ul>
     </div>
-  </section>
-</div>
-
-<section class="wrap stack">
-  <div class="stack-sm">
-    <span class="eyebrow">先に知っておいてほしいこと</span>
-    <h2>できないことも、隠さず書いています。</h2>
   </div>
-  <ul class="plain">
-    <li>
-      <strong>数字や実績を作りません。</strong>
-      ヒアリングで答えたものだけを使います。答えていない数字は【要記入】として残るので、公開前に埋めてください。
-    </li>
-    <li>
-      <strong>図解の画像は作りません。</strong>
-      「どこに・何を・どんな種類で」の指示書までです。画像は Canva などで作って、目印の行と差し替えてください。
-    </li>
-    <li>
-      <strong>一度に何章も書きません。</strong>
-      1章ずつ確認してから次に進みます。速さより、途中で薄くならないことを優先しています。
-    </li>
-    <li>
-      <strong>note の貼り付けは、環境で見え方が変わることがあります。</strong>
-      見出しが変換されなかったときは、その行を選んで見出しボタンを押せば直ります。表は最初から使わない書き方になっています。
-    </li>
-  </ul>
 </section>
 
-<div class="band">
-  <section class="wrap stack">
-    <div class="stack-sm">
-      <span class="eyebrow">同梱物</span>
+<section class="band-white">
+  <div class="wrap stack">
+    <div class="stack-sm center">
+      <span class="script">please read first</span>
+      <h2>できないことも、隠さず書いています。</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
+    </div>
+    <ul class="plain">
+      <li><strong>数字や実績を作りません。</strong> ヒアリングで答えたものだけを使います。答えていない数字は【要記入】として残るので、公開前に埋めてください。</li>
+      <li><strong>図解の画像は作りません。</strong> 「どこに・何を・どんな種類で」の指示書までです。画像は Canva などで作って、目印の行と差し替えてください。</li>
+      <li><strong>一度に何章も書きません。</strong> 1章ずつ確認してから次に進みます。速さより、途中で薄くならないことを優先しています。</li>
+      <li><strong>note の貼り付けは、環境で見え方が変わることがあります。</strong> 見出しが変換されなかったときは、その行を選んで見出しボタンを押せば直ります。表は最初から使わない書き方になっています。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band-pink">
+  <div class="blob blob--blue" style="width:260px;height:260px;right:-80px;top:-40px;opacity:.6"></div>
+  <div class="wrap stack-lg rel">
+    <div class="stack-sm center">
+      <span class="script">inside the box</span>
       <h2>中身</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
     </div>
     <div class="tree"><b>note-builder/</b>
 ├── <b>SKILL.md</b>                    本体。フェーズの流れと各フェーズのルール
@@ -632,7 +525,7 @@
     └── <b>企画書.md</b>               主張・特典・目次の雛形</div>
 
     <div class="stack-sm">
-      <p class="small">できあがるもの（ノート1本につき1フォルダ）</p>
+      <p class="small center">できあがるもの（ノート1本につき1フォルダ）</p>
       <div class="tree"><b>ノート名/</b>
 ├── _state.md            進捗。次回はここから再開
 ├── 00_ヒアリング.md      答えの記録
@@ -643,49 +536,50 @@
 └── 11_セールスレター.md  販売ページ用</div>
     </div>
 
-    <div class="dl-row">
-      <div>
-        <a class="dl" id="dl2" href="note-builder.zip" download>スキルをダウンロード</a>
-        <div class="dl-meta">Claude Code で動作します（Mac / Windows）</div>
-      </div>
+    <div class="center">
+      <a class="btn" href="note-builder.zip" download>スキルをダウンロード</a>
+      <div class="btn-meta">Claude Code で動作します（Mac / Windows）</div>
     </div>
-  </section>
-</div>
-
-<section class="wrap stack">
-  <div class="stack-sm">
-    <span class="eyebrow">最後に</span>
-    <h2>「わからない」を、そのまま<br class="br-wide">言葉にして渡してください。</h2>
   </div>
-
-  <p class="muted">
-    AI を使ううえでいちばん大切なのは、<strong>わからないことを言語化して伝えること</strong>です。
-    うまく動かない、書いてある意味がわからない、思っていたのと違う——
-    それをそのまま言葉にして渡せば、直せます。察してもらう必要はありません。
-  </p>
-
-  <p class="muted">
-    出てきた文章が自分の言葉じゃないと感じたら、それも伝えてください。
-    <strong>「私はこういう言い方はしない」</strong>と一言添えるだけで、次の章から変わります。
-  </p>
-
-  <div class="stack-sm">
-    <p class="small">伝え方は、このくらいで十分です。</p>
-    <ul class="says">
-      <li>質問が多すぎる。もっと少なくして</li>
-      <li>この主張、読者には刺さらない気がする</li>
-      <li>本編の文体が固い。もっと話し言葉で</li>
-    </ul>
-  </div>
-
-  <p class="muted">
-    その修正を何度も繰り返していくうちに、これは<strong>あなた専用の道具</strong>になっていきます。
-    最初から完成しているものより、そうやって育てたものの方が、ずっと長く使えます。
-  </p>
 </section>
 
-<footer class="wrap">
-  <p>note-builder — for Claude Code</p>
+<section class="band-white">
+  <div class="wrap stack">
+    <div class="stack-sm center">
+      <span class="script">one last thing</span>
+      <h2>「わからない」を、そのまま<br class="br-wide">言葉にして渡してください。</h2>
+      <div class="dots"><i></i><i></i><i></i></div>
+    </div>
+    <p class="muted center">
+      AI を使ううえでいちばん大切なのは、<strong>わからないことを言語化して伝えること</strong>です。
+      うまく動かない、書いてある意味がわからない、思っていたのと違う。
+      それをそのまま言葉にして渡せば、直せます。察してもらう必要はありません。
+    </p>
+    <p class="muted center">
+      出てきた文章が自分の言葉じゃないと感じたら、それも伝えてください。
+      <strong>「私はこういう言い方はしない」</strong>と一言添えるだけで、次の章から変わります。
+    </p>
+    <div class="stack-sm">
+      <p class="small center">伝え方は、このくらいで十分です。</p>
+      <ul class="says">
+        <li>質問が多すぎる。もっと少なくして</li>
+        <li>この主張、読者には刺さらない気がする</li>
+        <li>本編の文体が固い。もっと話し言葉で</li>
+      </ul>
+    </div>
+    <p class="muted center">
+      その修正を何度も繰り返していくうちに、これは<strong class="hl">あなた専用の道具</strong>になっていきます。
+      最初から完成しているものより、そうやって育てたものの方が、ずっと長く使えます。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="blob blob--pink" style="width:300px;height:300px;left:50%;top:-120px;transform:translateX(-50%);opacity:.6"></div>
+  <div class="rel">
+    <span class="script script--big">thank you</span>
+    <p style="margin-top:10px">note-builder — for Claude Code</p>
+  </div>
 </footer>
 
 <script>
@@ -695,12 +589,11 @@
       if (!pre) return;
       navigator.clipboard.writeText(pre.textContent.trim()).then(function () {
         var old = btn.textContent;
-        btn.textContent = "COPIED";
+        btn.textContent = "COPIED!";
         setTimeout(function () { btn.textContent = old; }, 1400);
       });
     });
   });
 </script>
-
 </body>
 </html>

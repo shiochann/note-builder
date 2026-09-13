@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>note-builder — 有料ノートを、企画からセールスレターまで質問に答えるだけで作るスキル</title>
-<meta name="description" content="note / Brain の有料ノートを、ヒアリング→知識の整理→核となる主張→目次→本編（1章ずつ・図解の指示書つき）→セールスレターの順に作る Claude Code スキル。できあがった本編はそのまま note に貼るだけです。">
+<meta name="description" content="note / Brain の有料ノートを、ヒアリング→知識の整理→目次→本編（1章ずつ・図解の指示書つき）→核となる主張→セールスレターの順に作る Claude Code スキル。できあがった本編はそのまま note に貼るだけです。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ノートを、企画からセールスレターまで。質問に答えるだけで。">
-<meta property="og:description" content="有料ノートを、主張→目次→本編→レターの順に組み上げる Claude Code スキル。本編はコピペで note に貼れる形で出てきます。">
+<meta property="og:description" content="有料ノートを、目次→本編→主張→レターの順に組み上げる Claude Code スキル。本編はコピペで note に貼れる形で出てきます。">
 <meta property="og:url" content="https://shiochann.github.io/note-builder/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9D%3C/text%3E%3C/svg%3E">
@@ -303,7 +303,7 @@
     <div class="logo">note<span>-</span>builder</div>
     <h1>ノートを、企画から<br class="br-wide">セールスレターまで。</h1>
     <p class="lede">
-      「何を書くか」を質問で引き出して、核となる主張を決め、目次を組み、本編を1章ずつ書き、最後にセールスレターを作る。
+      「何を書くか」を質問で引き出して、目次を組み、本編を1章ずつ書き、最後に核となる主張を決めてセールスレターを作る。
       有料ノート（note / Brain）を作る手順を、Claude&nbsp;Code の質問に答えるだけで進められるスキルです。
       できあがった本編は、<strong class="hl">そのまま note に貼るだけ</strong>。
     </p>
@@ -324,16 +324,16 @@
     <p class="muted center">
       <code>/note-builder</code> と打つと、Claude が質問を始めます。
       誰に売るのか、特典は決まっているか、知識をまとめたファイルはあるか、実績の数字はどれか。
-      答え終わると、<strong>主張 → 目次 → 本編 → セールスレター</strong> の順に、あなたの承認を取りながら進みます。
+      答え終わると、<strong>目次 → 本編 → 主張 → セールスレター</strong> の順に、あなたの承認を取りながら進みます。
     </p>
     <p class="muted center">勝手に先へは進みません。目次は納得するまで直せますし、本編は1章ずつ確認してから次に行きます。</p>
 
     <div class="cards">
       <div class="card"><div class="ico">📚</div><h3>知識のまとめ</h3><p>質問の答えと、すでに持っているファイルを1枚に並べ直したもの。本編の材料になります。</p></div>
-      <div class="card"><div class="ico">🧭</div><h3>企画書</h3><p>核となる主張・特典・目次。ノートの背骨です。修正はここで受けます。</p></div>
+      <div class="card"><div class="ico">🧭</div><h3>企画書</h3><p>特典と目次。ノートの背骨です。修正はここで受けます。</p></div>
       <div class="card"><div class="ico">📝</div><h3>本編（1ファイル）</h3><p>章ごとに書いて、同じファイルに足していきます。開いて全部コピーして、note に貼るだけ。</p></div>
       <div class="card"><div class="ico">🎨</div><h3>図解の指示書</h3><p>本編のどこに、どんな図を入れるか。要素とキャプションまで書いてあるので、Canva で作れます。</p></div>
-      <div class="card"><div class="ico">💌</div><h3>セールスレター</h3><p>本編が全部できてから作ります。主張と矛盾していないかの確認表つきです。</p></div>
+      <div class="card"><div class="ico">💌</div><h3>主張とセールスレター</h3><p>本編が全部できてから、売るための一本の線を決めてレターを書きます。本編との整合チェック表つきです。</p></div>
     </div>
   </div>
 </section>
@@ -344,33 +344,33 @@
   <div class="wrap stack-lg rel">
     <div class="stack-sm center">
       <span class="script">the core idea</span>
-      <h2>目次より先に、「主張」を決める。</h2>
+      <h2>本編は自由に。<br class="br-wide">「主張」はセールスレターのために。</h2>
       <div class="dots"><i></i><i></i><i></i></div>
-      <p class="lede center">ノートが途中で薄くなるのは、章を並べてから書く理由を探すからです。このスキルは順番を逆にしています。</p>
+      <p class="lede center">本編を「売るための主張」に合わせて書くと、読者に役立つ話が削られます。だから順番を分けています。本編を先に、主張はあとから。</p>
     </div>
 
     <div class="flow">
+      <div class="flow-box">
+        <div class="flow-head"><span class="flow-title">目次 → 本編</span><span class="tag">読者の理解の順番</span></div>
+        <p>問題 → 原因 → 解決 → 手順 → 応用。入れたい章は理由を問わず入れます。主張は持ち込みません。</p>
+      </div>
+      <div class="flow-arrow">本編が全部できてから</div>
       <div class="flow-box flow-box--main">
-        <div class="flow-head"><span class="flow-title">核となる主張</span><span class="tag tag--pink">最初に決める</span></div>
-        <p>「○○だけでは△△になる。だから□□が必要」。一文で言える形にします。<br>
+        <div class="flow-head"><span class="flow-title">核となる主張</span><span class="tag tag--pink">レター専用</span></div>
+        <p>「○○だけでは△△になる。だから□□が必要」。完成した本編に書いてあることだけを根拠に、一文で言える形にします。<br>
           例：「Threads だけだと垢バンで全部消える。だから X も同時に育てる。だから X の伸ばし方を知る必要がある」</p>
         <div class="chips"><span class="chip">根拠 3つ</span><span class="chip">反論と回答</span><span class="chip">敵と味方</span><span class="chip">読者が翌日やること</span></div>
       </div>
-      <div class="flow-arrow">この主張から外れないように</div>
+      <div class="flow-arrow">主張が決まってから</div>
       <div class="flow-box">
-        <div class="flow-head"><span class="flow-title">目次</span><span class="tag">主張の証明の順番</span></div>
-        <p>各章に「この章は主張のどの根拠を証明するのか」を付けます。どの根拠にも繋がらない章は削られます。</p>
-      </div>
-      <div class="flow-arrow">目次が確定してから</div>
-      <div class="flow-box">
-        <div class="flow-head"><span class="flow-title">本編 → セールスレター</span><span class="tag tag--blue">最後に作る</span></div>
-        <p>レターは本編が全部できてから、実際の見出しを見て書きます。末尾に「主張の各要素をレターのどこで回収したか」の表が付き、空欄があるうちは完成にしません。</p>
+        <div class="flow-head"><span class="flow-title">セールスレター</span><span class="tag tag--blue">最後に作る</span></div>
+        <p>実際の本編の見出しから商品説明を書きます。末尾に「主張の各要素をレターのどこで回収し、本編のどこが裏づけか」の表が付き、空欄があるうちは完成にしません。本編に裏づけがなければ、主張のほうを直します。</p>
       </div>
     </div>
 
     <div class="memo">
       <h3>特典は、いちばん最初に聞きます</h3>
-      <p>特典が決まっているなら、知識を整理する段階から「本編のどこで特典に繋げるか」を織り込みます。決まっていなければ、主張を実行する手段になるものを目次の段階で3案出します。</p>
+      <p>特典が決まっているなら、知識を整理する段階から「本編のどこで特典に繋げるか」を織り込みます。決まっていなければ、本編を読んだ人が手を動かすときに欲しくなるものを目次の段階で3案出します。</p>
     </div>
   </div>
 </section>
@@ -444,7 +444,7 @@
         <li><strong>見出しがちゃんと見出しになっているか</strong>を確認します。なっていなければ、その行を選んで note の見出しボタンを押してください。</li>
         <li>本文の中の <strong>【図解1｜フロー図】〜</strong> のような行は、画像を入れる目印です。<code>03_図解計画.md</code> の指示書どおりに画像を作って、その行と差し替えます。</li>
         <li><strong><code>=====ここから有料=====</code></strong> という行は、有料ラインの目印です。この行を消して、note の「有料エリア設定」をその位置にします。</li>
-        <li>セールスレター（<code>11_セールスレター.md</code>）は、有料ラインより上の無料部分に貼ります。</li>
+        <li>セールスレター（<code>12_セールスレター.md</code>）は、有料ラインより上の無料部分に貼ります。</li>
       </ul>
     </div>
 
@@ -468,10 +468,10 @@
     <div class="phases">
       <div class="phase"><div class="sticker" style="transform:rotate(6deg)"><b>1</b></div><div class="phase-body"><strong>ヒアリング</strong><p>売る場所、特典、既存ファイル、読者、実績の数字、失敗談。答えはそのまま記録されます。</p></div></div>
       <div class="phase"><div class="sticker"><b>2</b></div><div class="phase-body"><strong>知識の整理</strong><p>答えと既存ファイルを、読者・実績・知識・失敗談・特典の順に1枚へ並べ直します。抜けがあれば追加で聞かれます。</p></div></div>
-      <div class="phase"><div class="sticker" style="transform:rotate(5deg)"><b>3</b></div><div class="phase-body"><strong>核となる主張</strong><p>候補が3つ出ます。選ぶか、混ぜるか、直すか。ここが決まるまで目次には進みません。</p></div></div>
-      <div class="phase"><div class="sticker"><b>4</b></div><div class="phase-body"><strong>目次と特典案</strong><p>有料ラインの位置、各章でできるようになること、図解を入れる予定の場所まで入った目次が出ます。納得するまで直せます。</p></div></div>
-      <div class="phase"><div class="sticker" style="transform:rotate(7deg)"><b>5</b></div><div class="phase-body"><strong>本編（1章ずつ）</strong><p>1回に1章。OK なら本編ファイルに足されます。同時に「ここに、この図解を」の指示書が書かれます。</p></div></div>
-      <div class="phase"><div class="sticker"><b>6</b></div><div class="phase-body"><strong>セールスレター</strong><p>本編の実際の見出しから商品説明を書きます。主張との整合チェック表つき。</p></div></div>
+      <div class="phase"><div class="sticker" style="transform:rotate(5deg)"><b>3</b></div><div class="phase-body"><strong>目次と特典案</strong><p>有料ラインの位置、各章でできるようになること、図解を入れる予定の場所まで入った目次が出ます。納得するまで直せます。</p></div></div>
+      <div class="phase"><div class="sticker"><b>4</b></div><div class="phase-body"><strong>本編（1章ずつ）</strong><p>1回に1章。OK なら本編ファイルに足されます。同時に「ここに、この図解を」の指示書が書かれます。主張には縛られません。</p></div></div>
+      <div class="phase"><div class="sticker" style="transform:rotate(7deg)"><b>5</b></div><div class="phase-body"><strong>核となる主張（レター用）</strong><p>本編ができてから、候補が3つ出ます。選ぶか、混ぜるか、直すか。根拠は本編に書いてあることだけ。</p></div></div>
+      <div class="phase"><div class="sticker"><b>6</b></div><div class="phase-body"><strong>セールスレター</strong><p>本編の実際の見出しから商品説明を書きます。主張と本編の整合チェック表つき。</p></div></div>
     </div>
 
     <div class="stack-sm">
@@ -515,14 +515,14 @@
 ├── <b>README.md</b>                   渡された人が最初に読む説明書
 ├── references/
 │   ├── <b>01_interview.md</b>         ヒアリングの質問票（特典→既存ファイル→ドメインの順）
-│   ├── <b>02_claim-patterns.md</b>    核となる主張の型 5つ
+│   ├── <b>02_claim-patterns.md</b>    主張の型 5つ（レター用）
 │   ├── <b>03_toc-patterns.md</b>      目次の型と有料ラインの置き方
 │   ├── <b>04_diagram-types.md</b>     図解の種類と指示書の書き方
 │   ├── <b>05_platform-rules.md</b>    note / Brain で崩れない記法
 │   └── <b>06_letter-structure.md</b>  セールスレターの骨格と整合チェック
 └── templates/
     ├── <b>_state.md</b>               進捗ファイルの雛形
-    └── <b>企画書.md</b>               主張・特典・目次の雛形</div>
+    └── <b>企画書.md</b>               特典・目次の雛形</div>
 
     <div class="stack-sm">
       <p class="small center">できあがるもの（ノート1本につき1フォルダ）</p>
@@ -530,10 +530,11 @@
 ├── _state.md            進捗。次回はここから再開
 ├── 00_ヒアリング.md      答えの記録
 ├── 01_domain.md         まとめた知識
-├── 02_企画書.md         主張・特典・目次
+├── 02_企画書.md         特典・目次
 ├── 03_図解計画.md       図解の指示書
 ├── <b>10_本編.md</b>           本編。これをそのまま note に貼る
-└── 11_セールスレター.md  販売ページ用</div>
+├── 11_主張.md           セールスレターの核となる主張
+└── 12_セールスレター.md  販売ページ用</div>
     </div>
 
     <div class="center">
